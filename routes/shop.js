@@ -13,7 +13,7 @@ router.get('/profile',(req,res,next)=>{
 
 router.get('/',(req,res,next)=>{
 	const products = routeAdmin.products;
-	res.render('shop',{products});
+	res.render('shop',{products,path:'/'});
 })
 
 module.exports = router;

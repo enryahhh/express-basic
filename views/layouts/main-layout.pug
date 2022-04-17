@@ -1,0 +1,18 @@
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport")
+		title Shop
+		link(rel="stylesheet" href="/css/main.css")
+
+	body
+		header
+			nav.header
+				a.nav-item.logo LOGO
+				ul.header__item
+					li.header__list-item
+						a.nav-item(href="/" class= path=='/' ? "active" : "") Homepage
+					li.header__list-item
+						a.nav-item(href="admin/products" class= path=='/products' ? "active" : "") Products
+
+		block content
