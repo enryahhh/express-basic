@@ -1,0 +1,42 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	font-family: sans-serif;
+}
+.header{
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	background-color:#112031 ;
+}
+
+.header__item{
+	margin: 0;
+}
+
+.header ul li, .nav-item{
+	display: inline-block;
+	text-decoration: none;
+	margin: 0 5px;
+	color: white;
+}
+
+.nav-item{
+	padding: 10px;
+}
+
+.nav-item:hover{
+	background-color: #D4ECDD;
+	color: #152D35;
+}
+
+.not-found{
+	text-align: center;
+}
+
+main{
+	margin: 10px;
+}

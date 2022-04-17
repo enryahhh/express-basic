@@ -1,6 +1,10 @@
+const path = require('path');
+
 const express = require('express');
+const routeAdmin = require('./admin');
 
 const router = express.Router();
+const rootDir = require('../util/path')
 
 router.get('/profile',(req,res,next)=>{
 	console.log('route profile');
@@ -8,8 +12,8 @@ router.get('/profile',(req,res,next)=>{
 });
 
 router.get('/',(req,res,next)=>{
-	console.log('index middleware');
-	res.send('<h1>Hello From Express</h1>')
+	const products = routeAdmin.products;
+	res.render('shop',{products});
 })
 
 module.exports = router;
