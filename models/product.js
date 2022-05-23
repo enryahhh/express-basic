@@ -17,8 +17,8 @@ const prodProm = new Promise((resolve,reject)=>{
 module.exports = class Product {
 	
 
-	constructor(nama,imageUrl,price,desc){
-		this.id = +new Date();
+	constructor(id,nama,imageUrl,price,desc){
+		this.id = id;
 		this.name = nama;
 		this.imageUrl = imageUrl;
 		this.desc = desc;
@@ -52,5 +52,28 @@ module.exports = class Product {
 			product = products.find(prod=>prod.id == id);
 			cb(product);
 		});
+	}
+
+	update(id,product){
+		prodProm.then((products)=>{
+			const productInd = products.findIndex(prod=>prod.id == id);
+			const updatedProd = [...products];
+			console.log(updatedProd);
+			updatedProd[productInd] = product;
+			fs.writeFile(p,JSON.stringify(updatedProd),(err,fileContent)=>{
+					console.log(err);
+				});
+		});	
+	}
+
+	static delete(id){
+		prodProm.then((products)=>{
+			const productInd = products.findIndex(prod=>prod.id == id);
+			const updatedProd = [...products];
+			updatedProd.splice(productInd,1);
+			fs.writeFile(p,JSON.stringify(updatedProd),(err,fileContent)=>{
+					console.log(err);
+				});
+		});		
 	}
 }

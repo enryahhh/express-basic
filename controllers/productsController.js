@@ -23,6 +23,19 @@ const addProduct = (req,res,next)=>{
 	res.render('admin/add-product',{path:'/add-product'});
 }
 
+
+const storeProduct = (req,res,next)=>{
+	const id = +new Date();
+	const nama = req.body.name;
+	const img = req.body.image;
+	const price = req.body.price;
+	const desc = req.body.desc;
+
+	const product = new Product(id.toString(),nama,img,price,desc);
+	product.save();
+	res.redirect('/');
+}
+
 const editProduct = (req,res,next)=>{
 	const prodId = req.params.productId;
 	Product.findById(prodId,(product)=>{
@@ -30,14 +43,22 @@ const editProduct = (req,res,next)=>{
 	});
 }
 
-const storeProduct = (req,res,next)=>{
+const updateProduct = (req,res,next)=>{
+	const id = req.body.id;
 	const nama = req.body.name;
 	const img = req.body.image;
 	const price = req.body.price;
 	const desc = req.body.desc;
 
-	const product = new Product(nama,img,price,desc);
-	product.save();
+	const product = new Product(id,nama,img,price,desc);
+	product.update(id,product);
+
+	res.redirect('/');
+}
+
+const deleteProduct = (req,res,next)=>{
+	const prodId = req.body.id;
+	Product.delete(prodId);
 	res.redirect('/');
 }
 
@@ -46,5 +67,7 @@ module.exports = {
 	addProduct,
 	storeProduct,
 	editProduct,
-	getShopProducts
+	getShopProducts,
+	updateProduct,
+	deleteProduct
 }

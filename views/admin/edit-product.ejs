@@ -4,8 +4,9 @@
 
 	<main>
 		<h3> Edit Products Pages </h3>
-		<form action="/admin/product" method="POST">
+		<form action="/admin/product/update" method="POST">
 			<div class="form-group">
+				<input type="hidden" name="id" value="<%= product.id %>">
 				<div class="form-control">
 					<label for="">Product Name :</label>
 					<input type="text" name="name" value="<%= product.name %>">
