@@ -41,3 +41,63 @@ body{
 main{
 	margin: 10px;
 }
+
+.title-content{
+	text-align: center;
+}
+
+.form-group{
+	display: block;
+	margin: 0 auto;
+	width: 40%;
+}
+
+.form-control{
+	display: flex;
+	flex-direction: column;
+	margin: 20px 0;
+}
+
+
+.form-control input{
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.product-list{
+	display: flex;
+	gap: 1rem;
+}
+
+.card{
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  	transition: 0.3s;
+  	width: 30%;
+  	border-radius: 5px;
+  	padding: 1rem;
+}
+
+.card .card-body{
+	margin: 10px;
+}
+
+.btn{
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	border: 1px solid black;
+	padding: 7px;
+	border-radius: 5px;
+}
+
+.btn-edit:hover{
+	border: 1px solid green;
+	color: white;
+	background-color: green;
+}
+
+.btn-delete:hover{
+	border: 1px solid red;
+	color: white;
+	background-color: red;
+}

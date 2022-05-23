@@ -2,6 +2,9 @@ const path = require('path');
 
 const express = require('express');
 const routeAdmin = require('./admin');
+const productsController = require('../controllers/productsController');
+const transactionController = require('../controllers/transactionController');
+const shopController = require('../controllers/shopController');
 
 const router = express.Router();
 const rootDir = require('../util/path')
@@ -11,9 +14,9 @@ router.get('/profile',(req,res,next)=>{
 	res.send('<h1>User Data</h1>');
 });
 
-router.get('/',(req,res,next)=>{
-	const products = routeAdmin.products;
-	res.render('shop',{products,path:'/'});
-})
+router.get('/cart',transactionController.getCart);
+router.get('/checkout',transactionController.getCheckout);
+router.get('/products',shopController.indexProductShop);
+router.get('/',shopController.homepage);
 
 module.exports = router;

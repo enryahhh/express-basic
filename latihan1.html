@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Latihan Grid</title>
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		.container,.container1,.container2{
+			margin: 0 auto;
+			width: 600px;
+			display: grid;
+			gap: 5px;
+		}
+
+		.container{
+			grid-template-columns: 25% auto 50px;
+        	grid-template-rows: 50px 100px auto;
+		}
+
+		.container1{
+			grid-template-rows: 100px 50px;
+			grid-auto-flow: column;
+		}
+
+		.container2{
+			width: 100%;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 2fr repeat(2, 4fr) 2fr;
+			grid-template-areas: "header header"
+					   "section1 section1"
+					   "section2 section2"
+					   "section3 section3"
+					   "footer footer";
+
+
+			/*grid-auto-rows: 200px;*/
+		}
+
+
+		.item{
+			background-color: rgb(138, 209, 254);
+	        display: flex;
+	        justify-content: center;
+	        align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Kolom & Baris</h1>
+	<div class="container">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+	</div>
+	<hr>
+	<h1>Explicit | Implicit </h1>
+	<div class="container1">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+	</div>
+	<hr>
+	<h1>Coba-Coba </h1>
+	<div class="container2">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+		<div class="item">6</div>
+		<div class="item">7</div>
+		<div class="item">8</div>
+	</div>
+</body>
+</html>
