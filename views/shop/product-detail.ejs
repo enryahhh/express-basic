@@ -4,6 +4,20 @@
 
 	<main>
 		<h3>Product Detail</h3>
+		<div class="card card-product">
+					<img src="" alt="">
+					<div class="card-body">
+						<p><%= product.name %></p>
+						<p><%= product.price %></p>
+						<p><%= product.desc %></p>
+					</div>
+					<div class="card-footer">
+						<form action="/cart" method="POST">
+							<input type="hidden" name="id" value="<%= product.id %>">
+							<button  class="btn btn-default">Add To Cart</button>
+						</form>
+					</div>
+				</div>
 	</main>
 
 <%- include('../includes/end.ejs') %>

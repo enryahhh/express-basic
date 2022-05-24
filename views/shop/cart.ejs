@@ -4,6 +4,35 @@
 
 	<main>
 		<h3> Cart Pages </h3>
+		<table border="1">
+			<thead>
+				<th>No</th>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Qty</th>
+				<th>SubTotal</th>
+			</thead>
+
+			<tbody>
+				<% cart.products.forEach((prod,index) => {%>
+				<tr>
+					<td><%= index+1 %></td>
+					<td><%= prod.name %></td>
+					<td><%= prod.price %></td>
+					<td><%= prod.qty %></td>
+					<td><%= prod.qty*prod.price %></td>
+				</tr>
+				 <% });%>
+				 <tr>
+				 	<td colspan="4">
+				 		Total
+				 	</td>
+				 	<td>
+				 		<%= cart.totalPrice %>
+				 	</td>
+				 </tr>
+			</tbody>
+		</table>
 	</main>
 
 <%- include('../includes/end.ejs') %>

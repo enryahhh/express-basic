@@ -17,6 +17,13 @@ const indexProductShop = (req,res,next)=>{
 	
 }
 
+const showProductShop = (req,res,next)=>{
+	const prodId = req.params.productId;
+	Product.findById(prodId,(product)=>{
+		res.render('shop/product-detail',{product,path:'/product'})
+	});
+}
+
 const addCart = (req,res,next)=>{
 	// res.render('shop/cart',{path:'/add-product'});
 }
@@ -29,6 +36,7 @@ const storeProduct = (req,res,next)=>{
 
 module.exports = {
 	indexProductShop,
+	showProductShop,
 	addCart,
 	storeProduct,
 	homepage

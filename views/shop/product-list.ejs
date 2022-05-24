@@ -16,6 +16,13 @@
 						<p><%= product.price %></p>
 						<p><%= product.desc %></p>
 					</div>
+					<div class="card-footer">
+						<a href="/product/<%= product.id %>" class="btn btn-default">Detail</a>
+						<form action="/cart" method="POST">
+							<input type="hidden" name="id" value="<%= product.id %>">
+							<button  class="btn btn-default">Add To Cart</button>
+						</form>
+					</div>
 				</div>
 			<% }%>	
 		

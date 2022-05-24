@@ -88,6 +88,11 @@ main{
 	border: 1px solid black;
 	padding: 7px;
 	border-radius: 5px;
+	background-color: white;
+}
+
+.btn:hover{
+	cursor: pointer;
 }
 
 .btn-edit:hover{
@@ -100,4 +105,10 @@ main{
 	border: 1px solid red;
 	color: white;
 	background-color: red;
+}
+
+.btn-default:hover{
+	border: 1px solid white;
+	color: white;
+	background-color: black;	
 }

@@ -18,7 +18,6 @@ const indexProduct = (req,res,next)=>{
 	
 }
 
-
 const addProduct = (req,res,next)=>{
 	res.render('admin/add-product',{path:'/add-product'});
 }

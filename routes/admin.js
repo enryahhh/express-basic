@@ -12,6 +12,8 @@ router.get('/add-product',productsController.addProduct);
 
 router.post('/product',productsController.storeProduct);
 
+
+
 router.post('/product/update',productsController.updateProduct);
 
 router.get('/product/:productId',productsController.editProduct);

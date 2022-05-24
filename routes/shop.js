@@ -15,8 +15,12 @@ router.get('/profile',(req,res,next)=>{
 });
 
 router.get('/cart',transactionController.getCart);
+router.post('/cart',transactionController.addCart);
+
 router.get('/checkout',transactionController.getCheckout);
 router.get('/products',shopController.indexProductShop);
+router.get('/product/:productId',shopController.showProductShop);
 router.get('/',shopController.homepage);
+
 
 module.exports = router;
