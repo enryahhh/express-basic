@@ -6,14 +6,9 @@ const getShopProducts = (req,res,next)=>{
 }
 
 const indexProduct = (req,res,next)=>{
-	// const products = Product.fetchAll();
-	// console.log(products);
-	// res.render('products',{products,path:'/products'})
-	// console.log(Product.fetchAll().then(val=>console.log(val)).catch(err=>console.log(err)));
-	Product.fetchAll()
-	.then(([rows,fieldData])=>{
-		console.log(rows);
-		res.render('admin/products',{products:rows,path:'admin/products'})
+	Product.findAll()
+	.then(result=>{
+		res.render('admin/products',{products:result,path:'admin/products'})
 	})
 	.catch(err=>console.log(err));
 	
@@ -31,8 +26,13 @@ const storeProduct = (req,res,next)=>{
 	const desc = req.body.desc;
 	const stok = req.body.stok*1;
 
-	const product = new Product(nama,img,price,desc,stok);
-	product.save().then((result)=>{
+	Product.create({
+		name:nama,
+		img:img,
+		price:price,
+		stok:stok,
+		description:desc
+	}).then((result)=>{
 		console.log(result);
 		
 		res.redirect('/admin/products');
@@ -42,9 +42,9 @@ const storeProduct = (req,res,next)=>{
 
 const editProduct = (req,res,next)=>{
 	const prodId = req.params.productId;
-	Product.findById(prodId).then(([rows,fieldData])=>{
-		console.log(rows);
-		res.render('admin/edit-product',{product:rows[0],path:'/edit-product'});
+	Product.findByPk(prodId).then((result)=>{
+		console.log(result);
+		res.render('admin/edit-product',{product:result,path:'/edit-product'});
 	})
 	.catch(err=>console.log(err));
 }
@@ -55,10 +55,17 @@ const updateProduct = (req,res,next)=>{
 	const img = req.body.image;
 	const price = req.body.price*1;
 	const desc = req.body.desc;
-	const stok = req.body.stok*1;
 
-	const product = new Product(nama,img,price,desc);
-	product.update(id,product).then((result)=>{
+	Product.update({
+		name:nama,
+		img:img,
+		price:price,
+		description:desc
+	},{
+		where:{
+			id:id
+		}
+	}).then((result)=>{
 		console.log(result);
 		res.redirect('/admin/products');
 	})
@@ -67,7 +74,9 @@ const updateProduct = (req,res,next)=>{
 
 const deleteProduct = (req,res,next)=>{
 	const prodId = req.body.id;
-	Product.delete(prodId).then((result)=>{
+	Product.destroy({
+		where:{id:prodId}
+	}).then((result)=>{
 		console.log(result);
 		res.redirect('/admin/products');
 	})
