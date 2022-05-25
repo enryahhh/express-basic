@@ -15,6 +15,7 @@
 					<div class="card-body">
 						<p><%= product.name %></p>
 						<p><%= product.price %></p>
+						<p><%= product.stok %></p>
 						<p><%= product.desc %></p>
 					</div>
 
@@ -22,7 +23,7 @@
 						<a href="/admin/product/<%= product.id %>" class="btn btn-edit">Edit</a>
 						<form action="/admin/product/delete" method="POST">
 							<input type="hidden" name="id" value="<%= product.id %>">
-							<button  class="btn btn-delete">Delete</button>
+							<button  class="btn btn-delete" type="submit" onclick="return confirm('apakah anda yakin akan menghapus data ini?')">Delete</button>
 						</form>
 					</div>
 				</div>

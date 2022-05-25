@@ -11,16 +11,17 @@ const homepage = (req,res,next)=>{
 
 const indexProductShop = (req,res,next)=>{
 	Product.fetchAll()
-	.then((products)=>{
-		res.render('shop/product-list',{products,path:'/products'})
+	.then(([rows,fieldData])=>{
+		res.render('shop/product-list',{products:rows,path:'/products'})
 	})
 	
 }
 
 const showProductShop = (req,res,next)=>{
 	const prodId = req.params.productId;
-	Product.findById(prodId,(product)=>{
-		res.render('shop/product-detail',{product,path:'/product'})
+	Product.findById(prodId).then(([rows,fieldData])=>{
+		console.log(rows);
+		res.render('shop/product-detail',{product:rows[0],path:'/product'});
 	});
 }
 

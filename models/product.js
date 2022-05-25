@@ -1,84 +1,41 @@
-const path = require('path');
-const fs = require('fs');
-const conn = require('./util/db')
+const conn = require('../util/db')
 const Cart = require('../models/cart')
-const products = [];
-
-
-const p = path.join(path.dirname(process.mainModule.filename),'data','products.json');	
-const prodProm = new Promise((resolve,reject)=>{
-				fs.readFile(p,(err,fileContent)=>{
-				if(err){
-					resolve([]);
-				}
-				// console.log(JSON.parse(fileContent));
-				resolve(JSON.parse(fileContent));
-			})
-		});
 
 module.exports = class Product {
 	
 
-	constructor(id,nama,imageUrl,price,desc){
-		this.id = id;
+	constructor(nama,imageUrl,price,desc,stok){
 		this.name = nama;
 		this.imageUrl = imageUrl;
 		this.desc = desc;
 		this.price = price;
+		this.stok = stok;
 	}
 
 	save(){
-		fs.readFile(p,(err,fileContent)=>{
-			console.log(fileContent);
-			prodProm.then(value=>{
-				console.log(this);
-				value.push(this);
-				console.log(value);
-				fs.writeFile(p,JSON.stringify(value),(err,fileContent)=>{
-					console.log(err);
-				});
-			})
-			
-		})
+		const sql = `INSERT INTO products VALUES(NULL,'${this.name}','${this.imageUrl}','${this.price}','${this.stok}','${this.desc}')`;
+		console.log(sql);
+		return conn.execute(sql);
 	}
 
 	static fetchAll(){
-		const sql = "SELECT * FROM product";
-		
-		let products;
-		console.log(prodProm.then((products)=>products));
-		return prodProm;
+		const sql = "SELECT * FROM products";
+		return conn.execute(sql);
 	}
 
-	static findById(id,cb){
-		let product;
-		prodProm.then((products)=>{
-			product = products.find(prod=>prod.id == id);
-			cb(product);
-		});
+	static findById(id){
+		const sql = `SELECT * FROM products WHERE id = ${id}`;
+		return conn.execute(sql);
 	}
 
 	update(id,product){
-		prodProm.then((products)=>{
-			const productInd = products.findIndex(prod=>prod.id == id);
-			const updatedProd = [...products];
-			console.log(updatedProd);
-			updatedProd[productInd] = product;
-			fs.writeFile(p,JSON.stringify(updatedProd),(err,fileContent)=>{
-					console.log(err);
-				});
-		});	
+		const sql = `UPDATE products SET name = '${product.name}',img = '${product.imageUrl}',price = '${product.price}', description = '${product.desc}' WHERE id = ${id}`;
+		console.log(sql);
+		return conn.execute(sql);
 	}
 
 	static delete(id){
-		prodProm.then((products)=>{
-			const productInd = products.findIndex(prod=>prod.id == id);
-			const updatedProd = [...products];
-			Cart.remove(id);
-			updatedProd.splice(productInd,1);
-			fs.writeFile(p,JSON.stringify(updatedProd),(err,fileContent)=>{
-					console.log(err);
-				});
-		});		
+		const sql = `DELETE FROM products WHERE id = ${id}`;
+		return conn.execute(sql);
 	}
 }
