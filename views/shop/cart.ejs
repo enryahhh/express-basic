@@ -11,6 +11,7 @@
 				<th>Price</th>
 				<th>Qty</th>
 				<th>SubTotal</th>
+				<th>Aksi</th>
 			</thead>
 
 			<tbody>
@@ -21,13 +22,19 @@
 					<td><%= prod.price %></td>
 					<td><%= prod.qty %></td>
 					<td><%= prod.qty*prod.price %></td>
+					<td>
+						<form action="/cart-remove" method="POST">
+							<input type="hidden" name="id" value="<%= prod.id %>">
+							<button  class="btn btn-delete">Remove</button>
+						</form>
+					</td>
 				</tr>
 				 <% });%>
 				 <tr>
 				 	<td colspan="4">
 				 		Total
 				 	</td>
-				 	<td>
+				 	<td colspan="2">
 				 		<%= cart.totalPrice %>
 				 	</td>
 				 </tr>

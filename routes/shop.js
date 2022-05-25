@@ -14,8 +14,9 @@ router.get('/profile',(req,res,next)=>{
 	res.send('<h1>User Data</h1>');
 });
 
-router.get('/cart',transactionController.getCart);
-router.post('/cart',transactionController.addCart);
+router.get('/cart',shopController.getCart);
+router.post('/cart',shopController.addCart);
+router.post('/cart-remove',shopController.removeCart);
 
 router.get('/checkout',transactionController.getCheckout);
 router.get('/products',shopController.indexProductShop);

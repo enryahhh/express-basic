@@ -13,6 +13,8 @@ const routeAdmin = require('./routes/admin');
 const routeShop = require('./routes/shop');
 
 
+
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'public')));
 

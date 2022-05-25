@@ -46,4 +46,24 @@ module.exports = class Cart{
 				cb(JSON.parse(fileContent));
 			});
 	}
+
+	static remove(id){
+		fs.readFile(p,(err,fileContent)=>{
+			let cart;
+				if(!err){
+					cart = JSON.parse(fileContent);
+					const existProdInd = cart.products.findIndex(prod=>prod.id === id);
+					if(existProdInd == -1){
+						return;
+					}
+						const prodExist = cart.products[existProdInd];
+						cart.totalPrice -= prodExist.price*prodExist.qty;
+						cart.products.splice(existProdInd,1);
+						fs.writeFile(p,JSON.stringify(cart),err=>{
+							console.log(err);
+						})
+				}
+				console.log(err);
+			});
+	}
 }

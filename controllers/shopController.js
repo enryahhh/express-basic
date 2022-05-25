@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-
+const Cart = require('../models/cart')
 // const getShopProducts = (req,res,next)=>{
 // 	const products = Product.fetchAll();
 // 	res.render('shop/shop',{products,path:'/'});
@@ -24,20 +24,32 @@ const showProductShop = (req,res,next)=>{
 	});
 }
 
-const addCart = (req,res,next)=>{
-	// res.render('shop/cart',{path:'/add-product'});
+const getCart = (req,res,next)=>{
+	Cart.fetchCart((cart)=>{
+		console.log(cart);
+		res.render('shop/cart',{cart,path:'/cart'});
+	});
 }
 
-const storeProduct = (req,res,next)=>{
-	// const product = new Product(req.body.name);
-	// product.save();
-	// res.redirect('/');
+const addCart = (req,res,next)=>{
+	const prodId = req.body.id;
+	Product.findById(prodId,(product)=>{
+		Cart.addProduct(product);
+		res.redirect('/cart');
+	});
+}
+
+const removeCart = (req,res,next)=>{
+	const prodId = req.body.id;
+	Cart.remove(prodId);
+	res.redirect('/cart');
 }
 
 module.exports = {
+	getCart,
 	indexProductShop,
 	showProductShop,
 	addCart,
-	storeProduct,
+	removeCart,
 	homepage
 }

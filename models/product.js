@@ -1,7 +1,9 @@
 const path = require('path');
 const fs = require('fs');
-
+const conn = require('./util/db')
+const Cart = require('../models/cart')
 const products = [];
+
 
 const p = path.join(path.dirname(process.mainModule.filename),'data','products.json');	
 const prodProm = new Promise((resolve,reject)=>{
@@ -41,6 +43,8 @@ module.exports = class Product {
 	}
 
 	static fetchAll(){
+		const sql = "SELECT * FROM product";
+		
 		let products;
 		console.log(prodProm.then((products)=>products));
 		return prodProm;
@@ -70,6 +74,7 @@ module.exports = class Product {
 		prodProm.then((products)=>{
 			const productInd = products.findIndex(prod=>prod.id == id);
 			const updatedProd = [...products];
+			Cart.remove(id);
 			updatedProd.splice(productInd,1);
 			fs.writeFile(p,JSON.stringify(updatedProd),(err,fileContent)=>{
 					console.log(err);
