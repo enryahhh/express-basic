@@ -18,7 +18,12 @@ router.get('/cart',shopController.getCart);
 router.post('/cart',shopController.addCart);
 router.post('/cart-remove',shopController.removeCart);
 
-router.get('/checkout',transactionController.getCheckout);
+// router.get('/checkout',transactionController.getCheckout);
+// router.post('/create-checkout',transactionController.postCheckout);
+
+router.get('/order',transactionController.getOrder);
+router.post('/create-order',transactionController.postOrder);
+
 router.get('/products',shopController.indexProductShop);
 router.get('/product/:productId',shopController.showProductShop);
 router.get('/',shopController.homepage);

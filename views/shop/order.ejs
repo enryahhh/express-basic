@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs') %>
+<body>
+	<%- include('../includes/navigation.ejs') %>
+
+	<main>
+		<h3> Order Pages </h3>
+		<% if(orders.length > 0) { %>
+			<% orders.forEach((order,index) => { %>
+				<h2>#<%= index+1 %></h2>
+
+				<ul>
+					<% order.products.forEach((prod,index) => { %>
+						<li><%= prod.name %> (<%= prod.order_item.qty %>)</li>
+					<% }); %>
+				</ul>
+			<% }); %>
+		<% } else { %>
+			<h2>You doesn't have any order </h2>
+		<% } %>
+	</main>
+
+<%- include('../includes/end.ejs') %>

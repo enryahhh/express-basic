@@ -6,7 +6,7 @@ const getShopProducts = (req,res,next)=>{
 }
 
 const indexProduct = (req,res,next)=>{
-	Product.findAll()
+	req.user.getProducts()
 	.then(result=>{
 		res.render('admin/products',{products:result,path:'admin/products'})
 	})
@@ -25,8 +25,8 @@ const storeProduct = (req,res,next)=>{
 	const price = req.body.price*1;
 	const desc = req.body.desc;
 	const stok = req.body.stok*1;
-
-	Product.create({
+	
+	req.user.createProduct({
 		name:nama,
 		img:img,
 		price:price,

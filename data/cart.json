@@ -1,1 +1,1 @@
-{"products":[],"totalPrice":0}
+{"products":[{"id":3,"name":"Apa we","img":"asd","price":1000,"stok":2,"description":"qweasdzxc","qty":2},{"id":1,"name":"product1","img":"asdzxc","price":2000,"stok":10,"description":"tes123","qty":1}],"totalPrice":4000}
